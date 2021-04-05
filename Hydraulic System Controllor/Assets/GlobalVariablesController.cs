@@ -35,6 +35,8 @@ public class GlobalVariablesController : MonoBehaviour
     public static readonly float scaleIII = 5;
     public static readonly float scaleIV = 10;
     
+    
+    
     // Start is called before the first frame update
     private void Start()
     {
