@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Runtime.InteropServices;
+
+namespace _360_demo_cs
+{
+    public class DLL7360
+    {
+        //打开设备
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_OpenDevice(UInt32 cardNO);
+        //关闭设备
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_CloseDevice(UInt32 cardNO);
+        //得到当前错误号。如果错误号为0表示无错误
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_GetLastErr();
+        //清除错误号
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern void ZT7360_ClearLastErr();
+        //对指定通道进行单次数据采集
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_AIonce(UInt32 cardNO,
+                                                 UInt32 chMode,
+                                                 UInt32 chNO,
+                                                 UInt32 AIrange,
+                                                 UInt32 AIAmp,
+                                                 UInt32 ADstartMode,
+                                                 UInt32 ADfreq,
+                                                 UInt32 ABflag,
+                                                 UInt32 ch1Flag,
+                                                 UInt32 ADctrlWord,
+                                                 UInt32 ADoverTime);
+        //初始化AD
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_AIinit(UInt32 cardNO,
+                                                 UInt32 chMode,
+                                                 UInt32 chNO,
+                                                 UInt32 AIrange,
+                                                 UInt32 AIAmp,
+                                                 UInt32 ADstartMode,
+                                                 UInt32 ADfreq,
+                                                 UInt32 ABflag,
+                                                 UInt32 ch1Flag,
+                                                 UInt32 ADctrlWord,
+                                                 UInt32 ADoverTime);
+        //清空模块上硬件缓冲区(FIFO)
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_ClearFifo(UInt32 cardNO);
+        //得到驱动缓冲区中当前数据个数
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_GetSFifoDataCnt(UInt32 cardNO);
+
+        //成批读取AD数据。
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_AIFifoEx(UInt32 cardNO,
+                                                  UInt32 wantReadCount,
+                                                  [MarshalAs(UnmanagedType.I2)] out UInt16 pResultArr);
+        //得到指定通道的开关量输入状态
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_DIBit(UInt32 cardNO, UInt32 chNO);
+        //得到所有通道的开关量输入状态
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_DIAll(UInt32 cardNO);
+        //指定某通道的开关量输出状态
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_DOBit(UInt32 cardNO, UInt32 chNO, UInt32 nState);
+        //指定所有通道的开关量输出状态
+        [DllImport("usb7KChelper.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 ZT7360_DOAll(UInt32 cardNO, UInt32 nStateAll);
+
+    }
+}
